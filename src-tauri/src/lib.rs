@@ -4,7 +4,6 @@ use hidapi::HidApi;
 pub const LEDHID_VID: u16 = 0x1209;
 pub const LEDHID_PID: u16 = 0x0001;
 
-#[cfg(target_os = "macos")]
 #[tauri::command]
 async fn send_led(ir: u8, wh: u8, uv: u8) -> Result<(), String> {
     
