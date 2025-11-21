@@ -14,12 +14,13 @@ function App() {
   const sliderWhRef = useRef<any>(null);
   const sliderUvRef = useRef<any>(null);
 
-  var ir = 0;
-  var wh = 0;
-  var uv = 0;
+  // 最新の値を保持するためのrefを使用
+  const irRef = useRef(0);
+  const whRef = useRef(0);
+  const uvRef = useRef(0);
 
   const handleSliderChange = async () => {
-    await invoke("send_led", { ir, wh, uv });
+    await invoke("send_led", { ir: irRef.current, wh: whRef.current, uv: uvRef.current });
   };
 
   useEffect(() => {
@@ -35,21 +36,21 @@ function App() {
     const handleSlider1Change = (e: any) => {
       const value = parseInt(e.target.value);
       setSliderIr(value);
-      ir = value;
+      irRef.current = value;
       handleSliderChange();
     };
 
     const handleSlider2Change = (e: any) => {
       const value = parseInt(e.target.value);
       setSliderWh(value);
-      wh = value;
+      whRef.current = value;
       handleSliderChange();
     };
 
     const handleSlider3Change = (e: any) => {
       const value = parseInt(e.target.value);
       setSliderUv(value);
-      uv = value;
+      uvRef.current = value;
       handleSliderChange();
     };
 
